@@ -9,9 +9,8 @@ pytestmark = pytest.mark.html
 @pytest.fixture
 def app():
     fixture = Application()
-    request.addfinalizer(fixture.destroy)
-    return fixture
-
+    yield fixture
+    fixture.destroy()
 
 def test_add_group(app):
     app.login(username="admin", password="secret")
